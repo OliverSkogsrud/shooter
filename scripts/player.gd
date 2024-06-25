@@ -1,7 +1,7 @@
 extends CharacterBody3D
 
 var SPEED = 7.0
-const JUMP_VELOCITY = 7.0
+const JUMP_VELOCITY = 6.0
 var SENSETIVITY = 0.01
 
 
@@ -94,12 +94,15 @@ func run_state():
 	if direction:
 		if !$Neck/Camera3D/hand/Gun/AnimationPlayer.is_playing():
 			$Neck/Camera3D/hand/Gun/AnimationPlayer.play("Run")
+			
+		var sprintFovTween = get_tree().create_tween()
+		sprintFovTween.tween_property($Neck/Camera3D, "fov", 100, 0.5)
 		
-		$Neck/Camera3D.fov = 100
 		velocity.x = direction.x * SPEED
 		velocity.z = direction.z * SPEED
 	else:
-		$Neck/Camera3D.fov = 90
+		var sprintFovTween = get_tree().create_tween()
+		sprintFovTween.tween_property($Neck/Camera3D, "fov", 90, 0.5)
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		velocity.z = move_toward(velocity.z, 0, SPEED)
 	
@@ -126,8 +129,9 @@ func shoot_state():
 	if canShoot == true:
 		canShoot = false
 		
-		if !is_on_floor():
-			$Neck/Camera3D/hand/Gun/AnimationPlayer.current_animation = "shoot"
+		"""if !is_on_floor():
+			$Neck/Camera3D/hand/Gun/AnimationPlayer.current_animation = "shoot"""
+		
 		$Neck/Camera3D/hand/Gun/AnimationPlayer.play("shoot")
 		$Neck/Camera3D/hand/Gun/GPUParticles3D.emitting = true
 		instance = bullet.instantiate()
@@ -146,8 +150,9 @@ func sprint_state():
 	if direction:
 		if !$Neck/Camera3D/hand/Gun/AnimationPlayer.is_playing():
 			$Neck/Camera3D/hand/Gun/AnimationPlayer.play("Run")
+		var sprintFovTween = get_tree().create_tween()
+		sprintFovTween.tween_property($Neck/Camera3D, "fov", 110, 0.5)
 		
-		$Neck/Camera3D.fov = 110
 		velocity.x = direction.x * SPEED
 		velocity.z = direction.z * SPEED
 	else:

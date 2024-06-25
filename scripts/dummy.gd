@@ -19,11 +19,11 @@ func damage(dmg):
 		var blood_splash = blood_splash_pre.instantiate()
 		blood_splash.global_position = global_position
 		
-		blood_splash.emitting = true
-		
 		get_parent().add_child(blood_splash)
 		
-		await get_tree().create_timer(0.1).timeout
+		blood_splash.emitting = true
+		
+		await get_tree().create_timer(0.2).timeout
 		
 		queue_free()
 	
