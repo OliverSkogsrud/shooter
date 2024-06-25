@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://dwyd4lkkf3inx"]
+
+[ext_resource type="PackedScene" uid="uid://dfxhjxlga4xk8" path="res://models/Pine Tree.glb" id="1_a0kls"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_deeaj"]
+size = Vector3(0.354828, 2.22314, 0.294312)
+
+[node name="PineTree" type="Node3D"]
+
+[node name="Pine Tree" parent="." instance=ExtResource("1_a0kls")]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.012558, -0.611572, 0.0454712)
+shape = SubResource("BoxShape3D_deeaj")

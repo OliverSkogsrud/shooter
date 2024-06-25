@@ -1,0 +1,80 @@
+[gd_scene load_steps=5 format=3 uid="uid://c62qu1sk16bkk"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_13ff0"]
+bg_color = Color(0.367421, 0, 0.0795087, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 3
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+shadow_color = Color(1, 0, 0, 0.6)
+shadow_size = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mv8di"]
+bg_color = Color(1, 0, 0, 1)
+border_width_right = 2
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+shadow_size = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k1j4d"]
+bg_color = Color(0, 0.638256, 0.945199, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 3
+shadow_color = Color(0.38556, 0.57763, 1, 0.6)
+shadow_size = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gr7be"]
+bg_color = Color(0, 0.745098, 1, 1)
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+shadow_size = 2
+
+[node name="Health_Stamina_bars" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HealthBar" type="ProgressBar" parent="."]
+layout_mode = 1
+offset_left = 6.0
+offset_top = 9.0
+offset_right = 208.0
+offset_bottom = 36.0
+theme_override_styles/background = SubResource("StyleBoxFlat_13ff0")
+theme_override_styles/fill = SubResource("StyleBoxFlat_mv8di")
+value = 50.0
+
+[node name="staminaBar" type="ProgressBar" parent="."]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 13.0
+offset_top = -277.0
+offset_right = 166.0
+offset_bottom = -250.0
+grow_vertical = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_k1j4d")
+theme_override_styles/fill = SubResource("StyleBoxFlat_gr7be")
+value = 50.0

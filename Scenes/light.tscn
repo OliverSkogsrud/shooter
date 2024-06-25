@@ -1,0 +1,38 @@
+[gd_scene load_steps=4 format=3 uid="uid://dkvla0u7boqgm"]
+
+[ext_resource type="PackedScene" uid="uid://wougojkq436b" path="res://models/4 Bulb Grey Light - LRG Tubes.glb" id="1_ntggb"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fde4t"]
+albedo_color = Color(0, 1, 1, 1)
+emission_enabled = true
+emission = Color(0, 0.780392, 1, 1)
+emission_energy_multiplier = 16.0
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_gnciw"]
+material = SubResource("StandardMaterial3D_fde4t")
+
+[node name="Light" type="Node3D"]
+
+[node name="4 Bulb Grey Light - LRG Tubes" parent="." instance=ExtResource("1_ntggb")]
+transform = Transform3D(0.0973562, 0, 0, 0, 0.0973562, 0, 0, 0, 0.0973562, 0, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.09645e-09, -2.26119, 0, 0.0937159, -9.884e-08, 0, 0, 0, 0.0937159, 2.32509, 0.0132503, -0.240493)
+mesh = SubResource("CylinderMesh_gnciw")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.09645e-09, -2.26119, 0, 0.0937159, -9.884e-08, 0, 0, 0, 0.0937159, 2.32509, 0.0132503, -0.533602)
+mesh = SubResource("CylinderMesh_gnciw")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.09645e-09, -2.26119, 0, 0.0937159, -9.884e-08, 0, 0, 0, 0.0937159, 2.32509, 0.0132503, -0.830714)
+mesh = SubResource("CylinderMesh_gnciw")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.09645e-09, -2.26119, 0, 0.0937159, -9.884e-08, 0, 0, 0, 0.0937159, 2.32509, 0.0132503, -1.13024)
+mesh = SubResource("CylinderMesh_gnciw")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.37977, 0, -0.606024)
+light_color = Color(0, 1, 1, 1)
+light_volumetric_fog_energy = 6.02
