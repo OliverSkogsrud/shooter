@@ -74,8 +74,8 @@ _data = {
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_5jilj"]
 direction = Vector3(0, 0, -1)
 spread = 50.36
-initial_velocity_min = 6.0
-initial_velocity_max = 8.0
+initial_velocity_min = 10.0
+initial_velocity_max = 12.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1glxf"]
 albedo_color = Color(1, 0.552941, 0, 1)
@@ -85,7 +85,7 @@ emission_energy_multiplier = 8.0
 
 [sub_resource type="BoxMesh" id="BoxMesh_a22a7"]
 material = SubResource("StandardMaterial3D_1glxf")
-size = Vector3(0.05, 0.05, 0.05)
+size = Vector3(0.025, 0.025, 0.025)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6oyg4"]
 albedo_color = Color(1, 0.396078, 0, 1)
@@ -95,7 +95,7 @@ emission_energy_multiplier = 4.3
 
 [sub_resource type="BoxMesh" id="BoxMesh_wsy5l"]
 material = SubResource("StandardMaterial3D_6oyg4")
-size = Vector3(0.06, 0.06, 0.06)
+size = Vector3(0.03, 0.03, 0.03)
 
 [node name="Gun" type="Node3D"]
 
@@ -114,8 +114,9 @@ target_position = Vector3(0, 0, -1)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00345755, 0.248055, -1.9353)
 emitting = false
 amount = 10
-lifetime = 0.65
+lifetime = 0.35
 one_shot = true
+speed_scale = 2.0
 explosiveness = 1.0
 fixed_fps = 50
 visibility_aabb = AABB(-4, -3.91064, -4, 8, 8, 8)

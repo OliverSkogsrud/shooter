@@ -94,9 +94,12 @@ func run_state():
 	if direction:
 		if !$Neck/Camera3D/hand/Gun/AnimationPlayer.is_playing():
 			$Neck/Camera3D/hand/Gun/AnimationPlayer.play("Run")
+		
+		$Neck/Camera3D.fov = 100
 		velocity.x = direction.x * SPEED
 		velocity.z = direction.z * SPEED
 	else:
+		$Neck/Camera3D.fov = 90
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		velocity.z = move_toward(velocity.z, 0, SPEED)
 	
@@ -135,7 +138,6 @@ func shoot_state():
 		canShoot = true
 		
 func sprint_state():
-	
 	SPEED = 9.0
 	stamina -= 1
 	
@@ -144,6 +146,8 @@ func sprint_state():
 	if direction:
 		if !$Neck/Camera3D/hand/Gun/AnimationPlayer.is_playing():
 			$Neck/Camera3D/hand/Gun/AnimationPlayer.play("Run")
+		
+		$Neck/Camera3D.fov = 110
 		velocity.x = direction.x * SPEED
 		velocity.z = direction.z * SPEED
 	else:

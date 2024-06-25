@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://cxg77q4j43eim"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_gtr5s"]
+direction = Vector3(0, 1, 0)
+initial_velocity_min = 3.0
+initial_velocity_max = 5.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_au66i"]
+albedo_color = Color(0.745131, 0, 0.0725749, 1)
+emission_enabled = true
+emission = Color(0.912271, 4.71681e-06, 6.73831e-07, 1)
+emission_energy_multiplier = 15.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_xeaan"]
+material = SubResource("StandardMaterial3D_au66i")
+radius = 0.1
+height = 0.2
+
+[node name="BloodSplash" type="GPUParticles3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0595887, 0, 0)
+emitting = false
+amount = 10
+lifetime = 0.8
+one_shot = true
+speed_scale = 1.5
+explosiveness = 1.0
+randomness = 0.7
+process_material = SubResource("ParticleProcessMaterial_gtr5s")
+draw_pass_1 = SubResource("SphereMesh_xeaan")
