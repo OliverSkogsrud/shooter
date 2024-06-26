@@ -17,6 +17,8 @@ var state : int = 0
 
 var stamina_regen = false
 
+var dead = false
+
 var bullet = load("res://Scenes/bullet.tscn")
 
 var instance
@@ -76,7 +78,6 @@ func _physics_process(delta):
 	
 	# Handle jump.
 
-
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions
 	
@@ -95,14 +96,15 @@ func run_state():
 		if !$Neck/Camera3D/hand/Gun/AnimationPlayer.is_playing():
 			$Neck/Camera3D/hand/Gun/AnimationPlayer.play("Run")
 			
-		var sprintFovTween = get_tree().create_tween()
-		sprintFovTween.tween_property($Neck/Camera3D, "fov", 100, 0.5)
+		var runFovTween = get_tree().create_tween()
+		runFovTween.tween_property($Neck/Camera3D, "fov", 100, 0.5)
 		
 		velocity.x = direction.x * SPEED
 		velocity.z = direction.z * SPEED
 	else:
-		var sprintFovTween = get_tree().create_tween()
-		sprintFovTween.tween_property($Neck/Camera3D, "fov", 90, 0.5)
+		if dead == false:
+			var idlefovTween = get_tree().create_tween()
+			idlefovTween.tween_property($Neck/Camera3D, "fov", 90, 0.5)
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		velocity.z = move_toward(velocity.z, 0, SPEED)
 	
@@ -162,6 +164,7 @@ func damage(dmg):
 	health -= dmg
 	
 	if health <= 0:
+		await get_tree().create_timer(0.5)
 		get_tree().change_scene_to_file("res://Scenes/death_screen.tscn")
 	
 	print(dmg)

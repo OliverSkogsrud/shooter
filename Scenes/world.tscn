@@ -343,6 +343,24 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.28457, 0.852861, 18.9867)
 [node name="Dummy5" parent="." instance=ExtResource("3_vjmm5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.72855, 0.869087, 26.4964)
 
+[node name="Dummy6" parent="." instance=ExtResource("3_vjmm5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.25127, 1.6005, 36.8867)
+
+[node name="Dummy7" parent="." instance=ExtResource("3_vjmm5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.78821, 2.53467, 43.3053)
+
+[node name="Dummy8" parent="." instance=ExtResource("3_vjmm5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.2405, 3.14352, 41.8555)
+
+[node name="Dummy9" parent="." instance=ExtResource("3_vjmm5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.71951, -2.32309, 51.4548)
+
+[node name="Dummy10" parent="." instance=ExtResource("3_vjmm5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.6169, -1.10382, 58.2213)
+
+[node name="Dummy11" parent="." instance=ExtResource("3_vjmm5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.386236, 2.89221, 65.268)
+
 [node name="Lights" type="Node3D" parent="."]
 
 [node name="Light" parent="Lights" instance=ExtResource("6_ng285")]

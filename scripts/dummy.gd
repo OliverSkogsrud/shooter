@@ -60,7 +60,7 @@ func damage(dmg):
 		
 		$AudioStreamPlayer3D.play()
 		
-		await get_tree().create_timer(0.2).timeout
+		await get_tree().create_timer(0.3).timeout
 		
 		queue_free()
 	
