@@ -95,7 +95,13 @@ func _physics_process(delta):
 	
 	if sliding and get_floor_angle() > 0.2:
 		accel = 2
-
+	
+	slide_speed * accel
+	
+	if get_floor_angle() >= 0.2:
+		slide_speed += 1
+	
+	
 	
 	health_bar.value = health
 	stamina_bar.value = stamina
@@ -247,7 +253,7 @@ func slide():
 		else:
 			slide_speed = 2
 	
-	print(slide_speed)
+	print("speed: " + str(slide_speed))
 	
 	if slidecheck.is_colliding():
 		slide_speed += get_floor_angle() / 10
