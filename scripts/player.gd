@@ -69,6 +69,10 @@ func _physics_process(delta):
 		
 		
 	#slide
+	
+	if sliding:
+		slide_speed -= 2
+	
 	if falling and is_on_floor() and sliding:
 		slide_speed += fall_distance / 10
 	fall_distance = -gravity_vec.y
@@ -242,17 +246,21 @@ func slide():
 			slide_speed += fall_distance / 5
 		else:
 			slide_speed = 2
-	sliding = true
+	
+	print(slide_speed)
 	
 	if slidecheck.is_colliding():
 		slide_speed += get_floor_angle() / 10
 	else:
 		slide_speed -= (get_floor_angle() / 5) + 0.03
 		
-	if slide_speed > 20:
-		slide_speed = 20
+	if slide_speed >= 30:
+		slide_speed = 30
+		
+	"""var slide_speed_tween = get_tree().create_tween()
+	slide_speed_tween.tween_property(self, "slide_speed", 0, 2.0)"""
 	
-	if slide_speed < 0:
+	if slide_speed <= 0:
 		can_slide = false
 		sliding = false
 	SPEED = slide_speed
