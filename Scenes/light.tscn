@@ -36,3 +36,4 @@ mesh = SubResource("CylinderMesh_gnciw")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.37977, 0, -0.606024)
 light_color = Color(0, 1, 1, 1)
 light_volumetric_fog_energy = 6.02
+distance_fade_enabled = true

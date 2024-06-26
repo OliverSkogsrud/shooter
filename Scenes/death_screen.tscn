@@ -1,0 +1,47 @@
+[gd_scene load_steps=3 format=3 uid="uid://cofi86okft8hn"]
+
+[ext_resource type="Script" path="res://Scripts/death_screen.gd" id="1_0m67u"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_7u553"]
+font_size = 108
+font_color = Color(1, 0.180392, 0, 1)
+shadow_size = 19
+shadow_color = Color(0, 0, 0, 1)
+
+[node name="DeathScreen" type="Node2D"]
+script = ExtResource("1_0m67u")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+offset_right = 1154.0
+offset_bottom = 649.0
+
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="PanelContainer"]
+layout_mode = 2
+ratio = 0.548
+
+[node name="YouDiedText" type="Label" parent="PanelContainer/AspectRatioContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+text = "You Died"
+label_settings = SubResource("LabelSettings_7u553")
+horizontal_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/AspectRatioContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="TryAgain" type="Button" parent="PanelContainer/AspectRatioContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Try again?"
+
+[node name="Quit" type="Button" parent="PanelContainer/AspectRatioContainer/VBoxContainer"]
+layout_mode = 2
+text = "Quit
+"
+
+[node name="Camera2D" type="Camera2D" parent="PanelContainer"]
+position = Vector2(579, 326)
+
+[connection signal="pressed" from="PanelContainer/AspectRatioContainer/VBoxContainer/TryAgain" to="." method="_on_try_again_pressed"]
+[connection signal="pressed" from="PanelContainer/AspectRatioContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]

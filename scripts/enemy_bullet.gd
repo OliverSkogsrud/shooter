@@ -1,7 +1,7 @@
 extends Node3D
 
-@onready var ray = $RayCast3D
-@onready var mesh = $MeshInstance3D
+@onready var area = $Area3D
+@onready var mesh = $Area3D/MeshInstance3D
 @onready var particles = $GPUParticles3D
 
 const speed = 60.0
@@ -17,21 +17,16 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	position += transform.basis * Vector3(0, 0, -speed) * delta
-	if ray.is_colliding():
-		var collider = ray.get_collider()
-		if collider.has_method("damage"):
-			collider.damage(damage)
-		else:
-			particles.emitting = true
-			await get_tree().create_timer(1.0).timeout
-			queue_free()
-		
-		mesh.visible = false
-		particles.emitting = true
-		await get_tree().create_timer(1.0).timeout
-		queue_free()
-		
-
+	
 
 func _on_timer_timeout():
 	queue_free()
+
+
+
+func _on_area_3d_body_entered(body):
+	if body.has_method("damage"):
+		particles.emitting = true
+		body.damage(damage)
+		#get_tree().create_timer(1.0).timeout
+		queue_free()

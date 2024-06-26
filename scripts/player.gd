@@ -54,9 +54,6 @@ func _physics_process(delta):
 	if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
 			if Input.is_action_just_pressed("ui_cancel"):
 				Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-				
-	if Input.is_action_pressed("ui_down"):
-		$"../".exit_game(name.to_int())
 		
 			
 	health_bar.value = health
@@ -68,7 +65,11 @@ func _physics_process(delta):
 			
 	# Add the gravity.
 	if not is_on_floor():
+		$Neck/Camera3D/hand/Gun/AnimationPlayer.play("Jump")
 		velocity.y -= gravity * delta
+	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
+		velocity.y = JUMP_VELOCITY
+	
 	
 	if Input.is_action_pressed("shoot"):
 		shoot_state()
@@ -81,7 +82,6 @@ func _physics_process(delta):
 	
 	match state:
 		RUN: run_state()
-		JUMP: jump_state()
 		SPRINTING: sprint_state()
 	
 	move_and_slide()
@@ -106,24 +106,10 @@ func run_state():
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		velocity.z = move_toward(velocity.z, 0, SPEED)
 	
-	if !is_on_floor():
-		$Neck/Camera3D/hand/Gun/AnimationPlayer.play("Jump")
-	
-	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
-		state = JUMP
-		
 	if Input.is_action_just_pressed("sprint"):
 		state = SPRINTING
 		
 		
-	
-func jump_state():
-	SPEED = 7.0
-	velocity.y = JUMP_VELOCITY
-	$Neck/Camera3D/hand/Gun/AnimationPlayer.play("Jump")
-	
-	if is_on_floor():
-		state = RUN
 	
 func shoot_state():
 	if canShoot == true:
@@ -132,13 +118,15 @@ func shoot_state():
 		"""if !is_on_floor():
 			$Neck/Camera3D/hand/Gun/AnimationPlayer.current_animation = "shoot"""
 		
+		$Gunshot.play()
+		
 		$Neck/Camera3D/hand/Gun/AnimationPlayer.play("shoot")
 		$Neck/Camera3D/hand/Gun/GPUParticles3D.emitting = true
 		instance = bullet.instantiate()
 		instance.position = gun_barrel.global_position
 		instance.transform.basis = gun_barrel.global_transform.basis
 		get_parent().add_child(instance)
-		await get_tree().create_timer(0.1).timeout
+		await get_tree().create_timer(0.15).timeout
 		canShoot = true
 		
 func sprint_state():
@@ -159,9 +147,6 @@ func sprint_state():
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		velocity.z = move_toward(velocity.z, 0, SPEED)
 		
-	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
-		state = JUMP
-		
 	if Input.is_action_just_released("sprint"):
 		state = RUN
 		
@@ -177,10 +162,12 @@ func damage(dmg):
 	health -= dmg
 	
 	if health <= 0:
-		queue_free()
+		get_tree().change_scene_to_file("res://Scenes/death_screen.tscn")
 	
 	print(dmg)
 
+func heal(hp):
+	health = hp
 
 
 func _on_stamina_timer_timeout():

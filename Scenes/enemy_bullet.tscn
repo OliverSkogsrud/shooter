@@ -1,0 +1,63 @@
+[gd_scene load_steps=8 format=3 uid="uid://br6o8bl61uux7"]
+
+[ext_resource type="Script" path="res://scripts/enemy_bullet.gd" id="1_v5lc7"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_jt18j"]
+direction = Vector3(0, 0, 1)
+initial_velocity_min = 3.0
+initial_velocity_max = 5.0
+turbulence_noise_strength = 2.28
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_37qvr"]
+albedo_color = Color(1, 1, 0, 1)
+emission_enabled = true
+emission = Color(1, 0.537255, 0.054902, 1)
+emission_energy_multiplier = 8.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_e4e6r"]
+material = SubResource("StandardMaterial3D_37qvr")
+size = Vector3(0.04, 0.04, 0.04)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ptcmq"]
+albedo_color = Color(1, 0, 0.00784314, 1)
+emission_enabled = true
+emission = Color(0.984314, 0, 0, 1)
+emission_energy_multiplier = 8.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_k188r"]
+material = SubResource("StandardMaterial3D_ptcmq")
+size = Vector3(0.5, 0.5, 0.5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_l5rsc"]
+size = Vector3(0.325928, 0.33754, 1.77716)
+
+[node name="EnemyBullet" type="Node3D"]
+script = ExtResource("1_v5lc7")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+transform = Transform3D(-0.995821, 0, -0.0913278, 0, 1, 0, 0.0913278, 0, -0.995821, -0.0222234, 0.0360117, 0.614061)
+emitting = false
+lifetime = 0.62
+one_shot = true
+speed_scale = 0.7
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_jt18j")
+draw_pass_1 = SubResource("BoxMesh_e4e6r")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 10.0
+autostart = true
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Area3D"]
+transform = Transform3D(0.6688, 0, 0, 0, 0.6688, 0, 0, 0, 4.4384, 0, 0, 0)
+mesh = SubResource("BoxMesh_k188r")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00630015, -0.00283051, -0.207701)
+shape = SubResource("BoxShape3D_l5rsc")
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]

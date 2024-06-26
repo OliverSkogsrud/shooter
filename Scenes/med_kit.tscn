@@ -1,0 +1,58 @@
+[gd_scene load_steps=6 format=3 uid="uid://dffeqgxo26bav"]
+
+[ext_resource type="PackedScene" uid="uid://cwdlelx2ll7b6" path="res://models/Pickup Health.glb" id="1_my80p"]
+[ext_resource type="Script" path="res://scripts/med_kit.gd" id="1_vvrqm"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0frs3"]
+size = Vector3(1, 1.15149, 1)
+
+[sub_resource type="Animation" id="Animation_xmora"]
+resource_name = "medKitAnim"
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0.5, 0), Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 3.14159, 0), Vector3(0, 6.28319, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_nemrt"]
+_data = {
+"medKitAnim": SubResource("Animation_xmora")
+}
+
+[node name="MedKit" type="Area3D"]
+transform = Transform3D(0.765176, 0, 0.643821, 0, 1, 0, -0.643821, 0, 0.765176, 0, 0.0633231, 0)
+script = ExtResource("1_vvrqm")
+
+[node name="Root Scene" parent="." instance=ExtResource("1_my80p")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0757446, 0)
+shape = SubResource("BoxShape3D_0frs3")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_nemrt")
+}
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

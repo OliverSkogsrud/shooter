@@ -2,14 +2,14 @@
 
 [ext_resource type="Script" path="res://scripts/bullet.gd" id="1_bo4xk"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ptcmq"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_07srp"]
 albedo_color = Color(1, 0.517647, 0.00784314, 1)
 emission_enabled = true
 emission = Color(0.984314, 0.54902, 0, 1)
 emission_energy_multiplier = 8.0
 
 [sub_resource type="BoxMesh" id="BoxMesh_oh824"]
-material = SubResource("StandardMaterial3D_ptcmq")
+material = SubResource("StandardMaterial3D_07srp")
 size = Vector3(0.5, 0.5, 0.5)
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_pm244"]
@@ -18,14 +18,14 @@ initial_velocity_min = 3.0
 initial_velocity_max = 5.0
 turbulence_noise_strength = 2.28
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_37qvr"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mlf15"]
 albedo_color = Color(1, 1, 0, 1)
 emission_enabled = true
 emission = Color(1, 0.537255, 0.054902, 1)
 emission_energy_multiplier = 8.0
 
 [sub_resource type="BoxMesh" id="BoxMesh_jk4mo"]
-material = SubResource("StandardMaterial3D_37qvr")
+material = SubResource("StandardMaterial3D_mlf15")
 size = Vector3(0.04, 0.04, 0.04)
 
 [node name="Bullet" type="Node3D"]
