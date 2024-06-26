@@ -31,6 +31,9 @@ var instance
 
 var gravity_vec = Vector3()
 
+@export var air_acceleration : float = 3
+@export var acceleration : float = 12
+
 @onready var gun_barrel = $Neck/Camera3D/hand/Gun/RayCast3D
 @onready var gun = $Neck/Camera3D/hand/Gun
 @onready var hand = $Neck/Camera3D/hand
@@ -72,12 +75,19 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed("slide") and SPEED > 3:
 		can_slide = true
 	
-	if Input.is_action_pressed("slide") and is_on_floor() and Input.is_action_pressed("w") and can_slide:
+	if Input.is_action_pressed("slide") and is_on_floor() and Input.is_action_pressed("w") and can_slide == true:
 		slide()
 		
 	if Input.is_action_just_released("slide"):
+		state = RUN
 		can_slide = false
 		sliding = false
+		
+	var accel = acceleration if is_on_floor() else air_acceleration
+	if sliding:
+		accel = 1
+	else: accel = 0
+
 	
 	health_bar.value = health
 	stamina_bar.value = stamina
@@ -118,7 +128,11 @@ func _physics_process(delta):
 	
 	
 func run_state():
-	scale.y = 1
+	
+	if not sliding:
+		scale.y = 1
+		floor_stop_on_slope = true
+	
 	SPEED = 7.0
 	var input_dir = Input.get_vector("a", "d", "w", "s")
 	var direction = (neck.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
@@ -218,6 +232,7 @@ func _on_stamina_timer_timeout():
 func slide():
 	if not sliding:
 		if slidecheck.is_colliding() or get_floor_angle() < 0.2:
+			floor_stop_on_slope = false
 			scale.y = 0.5
 			slide_speed = 5
 			slide_speed += fall_distance / 10
@@ -230,8 +245,8 @@ func slide():
 	else:
 		slide_speed -= (get_floor_angle() / 5) + 0.03
 		
-	if slide_speed > 10:
-		slide_speed = 10
+	if slide_speed > 20:
+		slide_speed = 20
 	
 	if slide_speed < 0:
 		can_slide = false
