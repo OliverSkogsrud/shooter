@@ -40,8 +40,9 @@ layout_mode = 2
 text = "Quit
 "
 
-[node name="Camera2D" type="Camera2D" parent="PanelContainer"]
-position = Vector2(579, 326)
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(578, 323)
+zoom = Vector2(1.3, 1.3)
 
 [connection signal="pressed" from="PanelContainer/AspectRatioContainer/VBoxContainer/TryAgain" to="." method="_on_try_again_pressed"]
 [connection signal="pressed" from="PanelContainer/AspectRatioContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
