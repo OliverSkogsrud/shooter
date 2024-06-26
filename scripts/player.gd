@@ -76,6 +76,8 @@ func _physics_process(delta):
 	if Input.is_action_pressed("shoot"):
 		shoot_state()
 	
+	#headbob
+	
 	# Handle jump.
 
 	# Get the input direction and handle the movement/deceleration.
