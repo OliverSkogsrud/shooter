@@ -165,7 +165,7 @@ func damage(dmg):
 	
 	if health <= 0:
 		await get_tree().create_timer(0.5)
-		get_tree().change_scene_to_file("res://Scenes/death_screen.tscn")
+		get_tree().call_deferred("change_scene_to_file", "res://Scenes/death_screen.tscn")
 	
 	print(dmg)
 

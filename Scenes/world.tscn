@@ -433,7 +433,19 @@ transform = Transform3D(9.63553e-16, -0.504297, -2.20435e-08, -2.20435e-08, -2.2
 transform = Transform3D(9.63553e-16, -0.504297, -2.20435e-08, -2.20435e-08, -2.20435e-08, 0.504297, -0.504297, 0, -2.20435e-08, -4.93959, 2.06027, 32.2895)
 
 [node name="MedKit" parent="." instance=ExtResource("7_4hbgn")]
-transform = Transform3D(0.993631, 0, -0.112679, 0, 1, 0, 0.112679, 0, 0.993631, -7.45142, 0.295343, 28.8754)
+transform = Transform3D(0.993631, 0, -0.112679, 0, 1, 0, 0.112679, 0, 0.993631, -7.45142, 0.295343, 23.9377)
+
+[node name="MedKit2" parent="." instance=ExtResource("7_4hbgn")]
+transform = Transform3D(0.993631, 0, -0.112679, 0, 1, 0, 0.112679, 0, 0.993631, -12.7401, 1.74803, 37.0773)
+
+[node name="MedKit3" parent="." instance=ExtResource("7_4hbgn")]
+transform = Transform3D(0.993631, 0, -0.112679, 0, 1, 0, 0.112679, 0, 0.993631, 2.60211, 1.74803, 43.7623)
+
+[node name="MedKit4" parent="." instance=ExtResource("7_4hbgn")]
+transform = Transform3D(0.993631, 0, -0.112679, 0, 1, 0, 0.112679, 0, 0.993631, 4.30123, -3.7666, 52.9424)
+
+[node name="MedKit5" parent="." instance=ExtResource("7_4hbgn")]
+transform = Transform3D(0.993631, 0, -0.112679, 0, 1, 0, 0.112679, 0, 0.993631, -13.7351, -3.92874, 64.8996)
 
 [node name="Dummies" type="Node3D" parent="."]
 
