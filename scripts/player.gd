@@ -4,6 +4,12 @@ var SPEED = 7.0
 const JUMP_VELOCITY = 6.0
 var SENSETIVITY = 0.01
 
+var can_slide = true
+var slide_speed = 0
+var falling = false
+var fall_distance = 0
+var sliding = false
+
 
 var stamina = 100
 
@@ -23,14 +29,15 @@ var bullet = load("res://Scenes/bullet.tscn")
 
 var instance
 
+var gravity_vec = Vector3()
+
 @onready var gun_barrel = $Neck/Camera3D/hand/Gun/RayCast3D
 @onready var gun = $Neck/Camera3D/hand/Gun
 @onready var hand = $Neck/Camera3D/hand
 @onready var health_bar = $Health_Stamina_bars/HealthBar
 @onready var stamina_bar = $Health_Stamina_bars/staminaBar
 
-
-
+@onready var slidecheck = $SlideCheck
 
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
@@ -57,7 +64,21 @@ func _physics_process(delta):
 			if Input.is_action_just_pressed("ui_cancel"):
 				Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 		
-			
+	#slide
+	if falling and is_on_floor() and sliding:
+		slide_speed += fall_distance / 10
+	fall_distance = -gravity_vec.y
+	
+	if Input.is_action_just_pressed("slide") and SPEED > 3:
+		can_slide = true
+	
+	if Input.is_action_pressed("slide") and is_on_floor() and Input.is_action_pressed("w") and can_slide:
+		slide()
+		
+	if Input.is_action_just_released("slide"):
+		can_slide = false
+		sliding = false
+	
 	health_bar.value = health
 	stamina_bar.value = stamina
 			
@@ -67,10 +88,17 @@ func _physics_process(delta):
 			
 	# Add the gravity.
 	if not is_on_floor():
+		falling = true
 		$Neck/Camera3D/hand/Gun/AnimationPlayer.play("Jump")
 		velocity.y -= gravity * delta
 		SPEED += 0.2
+	else:
+		falling = false
 	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
+		if sliding:
+			slide_speed -= 1
+		rotation.x = 0
+		floor_stop_on_slope = false
 		velocity.y = JUMP_VELOCITY
 	
 	
@@ -85,12 +113,12 @@ func _physics_process(delta):
 	match state:
 		RUN: run_state()
 		SPRINTING: sprint_state()
-		SLIDE: slide()
 	
 	move_and_slide()
 	
 	
 func run_state():
+	scale.y = 1
 	SPEED = 7.0
 	var input_dir = Input.get_vector("a", "d", "w", "s")
 	var direction = (neck.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
@@ -188,10 +216,26 @@ func _on_stamina_timer_timeout():
 		stamina += 1
 		
 func slide():
-	SPEED = 10.0
-	var slide_tween = get_tree().create_tween()
-	slide_tween.tween_property(self, SPEED, 7.0, 3.0)
-	await get_tree().create_timer(3).timeout
-	state = RUN
+	if not sliding:
+		if slidecheck.is_colliding() or get_floor_angle() < 0.2:
+			scale.y = 0.5
+			slide_speed = 5
+			slide_speed += fall_distance / 10
+		else:
+			slide_speed = 2
+	sliding = true
+	
+	if slidecheck.is_colliding():
+		slide_speed += get_floor_angle() / 10
+	else:
+		slide_speed -= (get_floor_angle() / 5) + 0.03
 		
+	if slide_speed > 10:
+		slide_speed = 10
+	
+	if slide_speed < 0:
+		can_slide = false
+		sliding = false
+	SPEED = slide_speed
+
 
