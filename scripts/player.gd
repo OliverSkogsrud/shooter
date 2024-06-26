@@ -69,6 +69,7 @@ func _physics_process(delta):
 	if not is_on_floor():
 		$Neck/Camera3D/hand/Gun/AnimationPlayer.play("Jump")
 		velocity.y -= gravity * delta
+		SPEED += 0.2
 	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
 	
@@ -95,6 +96,8 @@ func run_state():
 	var input_dir = Input.get_vector("a", "d", "w", "s")
 	var direction = (neck.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	if direction:
+		var speed_tween = get_tree().create_tween()
+		speed_tween.tween_property(self, "SPEED", 7.0, 1)
 		if !$Neck/Camera3D/hand/Gun/AnimationPlayer.is_playing():
 			$Neck/Camera3D/hand/Gun/AnimationPlayer.play("Run")
 			
@@ -107,6 +110,7 @@ func run_state():
 		if dead == false:
 			var idlefovTween = get_tree().create_tween()
 			idlefovTween.tween_property($Neck/Camera3D, "fov", 90, 0.5)
+		SPEED = 7.0
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		velocity.z = move_toward(velocity.z, 0, SPEED)
 	
@@ -148,6 +152,7 @@ func sprint_state():
 		velocity.x = direction.x * SPEED
 		velocity.z = direction.z * SPEED
 	else:
+		SPEED = 7.0
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		velocity.z = move_toward(velocity.z, 0, SPEED)
 		

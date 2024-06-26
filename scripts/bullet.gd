@@ -1,6 +1,5 @@
 extends Node3D
 
-@onready var ray = $RayCast3D
 @onready var mesh = $MeshInstance3D
 @onready var particles = $GPUParticles3D
 
@@ -17,8 +16,8 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	position += transform.basis * Vector3(0, 0, -speed) * delta
-	if ray.is_colliding():
-		var collider = ray.get_collider()
+	if $RayCast3D.is_colliding():
+		var collider = $RayCast3D.get_collider()
 		if collider.has_method("damage"):
 			collider.damage(damage)
 		else:
