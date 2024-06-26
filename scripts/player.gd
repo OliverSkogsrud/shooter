@@ -82,6 +82,7 @@ func _physics_process(delta):
 	
 	if Input.is_action_pressed("slide") and is_on_floor() and Input.is_action_pressed("w") and can_slide == true:
 		slide()
+		slide_speed -= 1
 		
 	if Input.is_action_just_released("slide"):
 		state = RUN
@@ -248,7 +249,7 @@ func slide():
 		if slidecheck.is_colliding() or get_floor_angle() < 0.2:
 			floor_stop_on_slope = false
 			scale.y = 0.5
-			slide_speed = 5
+			slide_speed = 5 + SPEED
 			slide_speed += fall_distance / 5
 		else:
 			slide_speed = 2
