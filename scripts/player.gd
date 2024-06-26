@@ -11,7 +11,7 @@ var health = 100
 
 var canShoot = true
 
-enum {RUN, JUMP, SPRINTING}
+enum {RUN,SPRINTING, SLIDE}
 
 var state : int = 0
 
@@ -77,8 +77,6 @@ func _physics_process(delta):
 	if Input.is_action_pressed("shoot"):
 		shoot_state()
 	
-	#headbob
-	
 	# Handle jump.
 
 	# Get the input direction and handle the movement/deceleration.
@@ -87,6 +85,7 @@ func _physics_process(delta):
 	match state:
 		RUN: run_state()
 		SPRINTING: sprint_state()
+		SLIDE: slide()
 	
 	move_and_slide()
 	
@@ -116,6 +115,10 @@ func run_state():
 	
 	if Input.is_action_just_pressed("sprint"):
 		state = SPRINTING
+		
+	if Input.is_action_just_pressed("slide") or Input.is_action_just_pressed("slide2"):
+		state = SLIDE
+	
 		
 		
 	
@@ -183,5 +186,12 @@ func heal(hp):
 func _on_stamina_timer_timeout():
 	if stamina < 100:
 		stamina += 1
+		
+func slide():
+	SPEED = 10.0
+	var slide_tween = get_tree().create_tween()
+	slide_tween.tween_property(self, SPEED, 7.0, 3.0)
+	await get_tree().create_timer(3).timeout
+	state = RUN
 		
 
