@@ -67,6 +67,7 @@ func _physics_process(delta):
 			if Input.is_action_just_pressed("ui_cancel"):
 				Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 		
+		
 	#slide
 	if falling and is_on_floor() and sliding:
 		slide_speed += fall_distance / 10
@@ -87,6 +88,9 @@ func _physics_process(delta):
 	if sliding:
 		accel = 1
 	else: accel = 0
+	
+	if sliding and get_floor_angle() > 0.2:
+		accel = 2
 
 	
 	health_bar.value = health
@@ -235,7 +239,7 @@ func slide():
 			floor_stop_on_slope = false
 			scale.y = 0.5
 			slide_speed = 5
-			slide_speed += fall_distance / 10
+			slide_speed += fall_distance / 5
 		else:
 			slide_speed = 2
 	sliding = true
