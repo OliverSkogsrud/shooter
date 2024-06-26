@@ -45,7 +45,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 script = ExtResource("1_vvrqm")
 
 [node name="Root Scene" parent="." instance=ExtResource("1_my80p")]
-transform = Transform3D(-0.99504, 0, 0.0994798, 0, 1, 0, -0.0994798, 0, -0.99504, 0, 0.180411, 0)
+transform = Transform3D(-0.699671, 0, 0.714465, 0, 1, 0, -0.714465, 0, -0.699671, 0, 0.0733678, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0757446, 0)
