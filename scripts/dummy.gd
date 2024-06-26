@@ -25,7 +25,7 @@ func _physics_process(delta):
 		
 		loop = false
 		
-		look_at(get_parent_node_3d().get_node("Player").global_position)
+		look_at(get_parent_node_3d().get_parent_node_3d().get_node("Player").global_position)
 		
 		if ray.is_colliding():
 			var collider = ray.get_collider()
