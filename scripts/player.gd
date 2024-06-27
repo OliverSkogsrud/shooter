@@ -243,7 +243,6 @@ func slide():
 			slide_speed = 9
 		
 		print(get_floor_angle())
-		scale.y = 0.5
 		print("slide_speed: " + str(slide_speed))
 	
 	while sliding == true:
@@ -255,13 +254,10 @@ func slide():
 		if get_floor_angle() >= 0.2 and sliding:
 			slide_speed = slide_speed + get_floor_angle() * 1.5
 		
-		if not is_on_floor():
-			sliding = false
-			can_slide = true
-			state = RUN
-		
 		if slide_speed > 10:
 			slide_speed = 1
+		
+		scale.y = 0.5
 		
 		slide_speed -= 0.5
 		velocity = look_dir * slide_speed
