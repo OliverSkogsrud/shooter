@@ -180,8 +180,7 @@ func shoot_state():
 		canShoot = true
 		
 func sprint_state():
-	slide_speed = 9.0
-	if not sliding and SPEED > 1:
+	if not sliding:
 		SPEED = 9.0
 		stamina -= 1
 		
@@ -254,17 +253,16 @@ func slide():
 			can_slide = true
 			state = RUN
 		
-		velocity = look_dir * slide_speed
-		
 		if get_floor_angle() >= 0.2 and sliding:
 			slide_speed = slide_speed + get_floor_angle() * 1.5
 		
-		if slide_speed > 40:
-			slide_speed = 40
+		if slide_speed > 10:
+			slide_speed = 1
 			
-		slide_speed -= 0.8
+		slide_speed -= 0.5
+		velocity = look_dir * slide_speed
 		print(slide_speed)
-			
+		
 		await get_tree().create_timer(0.1).timeout
 
 
