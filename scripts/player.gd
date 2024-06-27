@@ -255,6 +255,11 @@ func slide():
 		if get_floor_angle() >= 0.2 and sliding:
 			slide_speed = slide_speed + get_floor_angle() * 1.5
 		
+		if not is_on_floor():
+			sliding = false
+			can_slide = true
+			state = RUN
+		
 		if slide_speed > 10:
 			slide_speed = 1
 		
