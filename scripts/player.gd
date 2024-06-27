@@ -11,6 +11,7 @@ var fall_distance = 0
 var sliding = false
 var slide_distance : float
 
+var slide_dir = false
 
 var current_speed = transform.basis.z.length()
 
@@ -76,9 +77,7 @@ func _physics_process(delta):
 		
 	#slide
 	
-	if sliding:
-		slide_speed -= 1
-		print(slide_speed)
+	
 	
 	#slide_speed = slide_speed * 2
 	
@@ -230,31 +229,43 @@ func _on_stamina_timer_timeout():
 		stamina += 1
 		
 func slide():
+	var look_dir = -neck.transform.basis.z
 	if can_slide:
 		SPEED = 0
 		sliding = true
 	if sliding == true and can_slide == true:
 		can_slide = false
-		var look_dir = -neck.transform.basis.z
+		
+		
 		
 		if SPEED <= 7.0:
 			slide_speed = 7
 		elif SPEED > 7.0:
 			slide_speed = 9
 		
-		velocity = look_dir * slide_speed
-		
 		print(get_floor_angle())
 		scale.y = 0.5
 		floor_stop_on_slope = false
 		print("slide_speed: " + str(slide_speed))
-	if slide_speed <= 0:
-		sliding = false
-		can_slide = true
-		state = RUN
 	
-	if slide_speed > 40:
-		slide_speed = 40
+	while sliding == true:
+		if slide_speed <= 0:
+			sliding = false
+			can_slide = true
+			state = RUN
+		
+		velocity = look_dir * slide_speed
+		
+		if get_floor_angle() >= 0.2 and sliding:
+			slide_speed = slide_speed + get_floor_angle() * 1.5
+		
+		if slide_speed > 40:
+			slide_speed = 40
+			
+		slide_speed -= 0.8
+		print(slide_speed)
+			
+		await get_tree().create_timer(0.1).timeout
 
 
 
