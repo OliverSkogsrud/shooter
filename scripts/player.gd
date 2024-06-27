@@ -244,7 +244,6 @@ func slide():
 		
 		print(get_floor_angle())
 		scale.y = 0.5
-		floor_stop_on_slope = false
 		print("slide_speed: " + str(slide_speed))
 	
 	while sliding == true:
@@ -258,12 +257,12 @@ func slide():
 		
 		if slide_speed > 10:
 			slide_speed = 1
-			
+		
 		slide_speed -= 0.5
 		velocity = look_dir * slide_speed
 		print(slide_speed)
 		
-		await get_tree().create_timer(0.1).timeout
+		await get_tree().create_timer(0.01).timeout
 
 
 
