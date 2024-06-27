@@ -262,7 +262,7 @@ func slide():
 		velocity = look_dir * slide_speed
 		print(slide_speed)
 		
-		await get_tree().create_timer(0.01).timeout
+		await get_tree().create_timer(.1).timeout
 
 
 
