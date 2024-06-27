@@ -30,6 +30,8 @@ var bullet = load("res://Scenes/bullet.tscn")
 
 var instance
 
+var current_forward_speed = Vector3.AXIS_Z
+
 var gravity_vec = Vector3()
 
 @export var air_acceleration : float = 3
@@ -70,10 +72,8 @@ func _physics_process(delta):
 		
 		
 	#slide
-	
-	if sliding:
-		if get_floor_angle() > 0.2:
-			slide_speed *= get_floor_angle()
+	if get_floor_angle() >= 0.2 and sliding:
+		slide_speed = current_forward_speed * get_floor_angle()
 	
 	#slide_speed = slide_speed * 2
 	
@@ -231,11 +231,12 @@ func slide():
 		slide_speed = 0
 		sliding = true
 	if sliding == true and can_slide == true:
+		
 		print(get_floor_angle())
 		scale.y = 0.5
 		floor_stop_on_slope = false
-		position = position.lerp(position * slide_distance, slide_speed)
-		print(slide_speed)
+		transform.basis.z * slide_speed
+		print("slide_speed: " + str(slide_speed))
 			
 	if slide_speed > 40:
 		slide_speed = 40

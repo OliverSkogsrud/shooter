@@ -41,5 +41,3 @@ size = Vector3(20.5426, 0.403564, 7.19702)
 
 [node name="Player" parent="." instance=ExtResource("1_77hcn")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 0)
-air_acceleration = 3.0
-acceleration = 12.0
