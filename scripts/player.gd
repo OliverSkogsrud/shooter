@@ -12,6 +12,8 @@ var sliding = false
 var slide_distance : float
 
 
+var current_speed = transform.basis.z.length()
+
 var stamina = 100
 
 var health = 100
@@ -57,6 +59,7 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	
+	
 func _input(event):
 	if event is InputEventMouseMotion:
 		neck.rotate_y(-event.relative.x * SENSETIVITY)
@@ -72,8 +75,10 @@ func _physics_process(delta):
 		
 		
 	#slide
-	if get_floor_angle() >= 0.2 and sliding:
-		slide_speed = current_forward_speed * get_floor_angle()
+	
+	if sliding:
+		slide_speed -= 1
+		print(slide_speed)
 	
 	#slide_speed = slide_speed * 2
 	
@@ -84,7 +89,7 @@ func _physics_process(delta):
 		
 	if Input.is_action_just_released("slide"):
 		state = RUN
-		can_slide = false
+		can_slide = true
 		sliding = false
 	
 	health_bar.value = health
@@ -128,11 +133,10 @@ func run_state():
 	if not sliding:
 		scale.y = 1
 		floor_stop_on_slope = true
-	slide_speed = 0
-	SPEED = 7.0
-	var input_dir = Input.get_vector("a", "d", "w", "s")
-	var direction = (neck.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
-	if not sliding:
+		slide_speed = 0
+		SPEED = 7.0
+		var input_dir = Input.get_vector("a", "d", "w", "s")
+		var direction = (neck.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 		if direction:
 			var speed_tween = get_tree().create_tween()
 			speed_tween.tween_property(self, "SPEED", 7.0, 1)
@@ -178,7 +182,7 @@ func shoot_state():
 		
 func sprint_state():
 	slide_speed = 9.0
-	if not sliding:
+	if not sliding and SPEED > 1:
 		SPEED = 9.0
 		stamina -= 1
 		
@@ -228,16 +232,27 @@ func _on_stamina_timer_timeout():
 func slide():
 	if can_slide:
 		SPEED = 0
-		slide_speed = 0
 		sliding = true
 	if sliding == true and can_slide == true:
+		can_slide = false
+		var look_dir = -neck.transform.basis.z
+		
+		if SPEED <= 7.0:
+			slide_speed = 7
+		elif SPEED > 7.0:
+			slide_speed = 9
+		
+		velocity = look_dir * slide_speed
 		
 		print(get_floor_angle())
 		scale.y = 0.5
 		floor_stop_on_slope = false
-		transform.basis.z * slide_speed
 		print("slide_speed: " + str(slide_speed))
-			
+	if slide_speed <= 0:
+		sliding = false
+		can_slide = true
+		state = RUN
+	
 	if slide_speed > 40:
 		slide_speed = 40
 
