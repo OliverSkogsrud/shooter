@@ -46,7 +46,7 @@ stream = ExtResource("5_o6omw")
 max_distance = 42.4
 
 [node name="SlideCheck" type="RayCast3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.999999, 0, 0, 0, 1.40348, -0.000202417, -1.30234, 8.05854e-05)
+transform = Transform3D(1, 0, 0, 0, 0.999999, 0, 0, 0, 1.40348, -0.000202417, -1.30234, -0.314024)
 target_position = Vector3(0, 0, 1)
 
 [connection signal="timeout" from="StaminaTimer" to="." method="_on_stamina_timer_timeout"]

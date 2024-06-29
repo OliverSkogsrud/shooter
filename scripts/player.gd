@@ -76,7 +76,8 @@ func _physics_process(delta):
 		
 		
 	#slide
-	
+	if slidecheck.is_colliding():
+		print("Its colliding")
 	
 	
 	#slide_speed = slide_speed * 2
