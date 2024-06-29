@@ -227,6 +227,7 @@ func _on_stamina_timer_timeout():
 		stamina += 1
 		
 func slide():
+	slide_speed = 1
 	var look_dir = -neck.transform.basis.z
 	if can_slide:
 		SPEED = 0
@@ -248,11 +249,12 @@ func slide():
 		if slide_speed <= 0:
 			sliding = false
 			can_slide = true
+			slide_speed = 0
 			state = RUN
 		
 		
 		if slide_speed > 10:
-			slide_speed = 1
+			slide_speed = 10
 		
 		if slidecheck.is_colliding():
 			print("is colling")
@@ -260,10 +262,12 @@ func slide():
 		scale.y = 0.5
 		
 		slide_speed -= 0.2
+		
+		if get_floor_angle() >= 0.2 and sliding:
+			slide_speed += get_floor_angle() * 3
+		
 		velocity = velocity.move_toward(look_dir * slide_speed, 0.1) #= look_dir * slide_speed
 		
-		if get_floor_angle() >= 0.2 and sliding and slidecheck.is_colliding():
-			slide_speed = slide_speed + get_floor_angle() * 2
 			
 		print(slide_speed)
 		
