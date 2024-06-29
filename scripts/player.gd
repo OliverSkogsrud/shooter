@@ -76,8 +76,6 @@ func _physics_process(delta):
 		
 		
 	#slide
-	if slidecheck.is_colliding():
-		print("Its colliding")
 	
 	
 	#slide_speed = slide_speed * 2
@@ -252,14 +250,14 @@ func slide():
 			can_slide = true
 			state = RUN
 		
-		if get_floor_angle() >= 0.2 and sliding:
-			slide_speed = slide_speed + get_floor_angle() * 1.5
-			
-		if slidecheck.is_colliding():
-			print("touching")
+		if get_floor_angle() >= 0.2 and sliding and slidecheck.is_colliding():
+			slide_speed = slide_speed + get_floor_angle() * 2
 		
 		if slide_speed > 10:
 			slide_speed = 1
+		
+		if slidecheck.is_colliding():
+			print("is colling")
 		
 		scale.y = 0.5
 		
