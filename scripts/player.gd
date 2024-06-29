@@ -250,8 +250,6 @@ func slide():
 			can_slide = true
 			state = RUN
 		
-		if get_floor_angle() >= 0.2 and sliding and slidecheck.is_colliding():
-			slide_speed = slide_speed + get_floor_angle() * 2
 		
 		if slide_speed > 10:
 			slide_speed = 1
@@ -263,6 +261,10 @@ func slide():
 		
 		slide_speed -= 0.2
 		velocity = velocity.move_toward(look_dir * slide_speed, 0.1) #= look_dir * slide_speed
+		
+		if get_floor_angle() >= 0.2 and sliding and slidecheck.is_colliding():
+			slide_speed = slide_speed + get_floor_angle() * 2
+			
 		print(slide_speed)
 		
 		await get_tree().create_timer(.08).timeout
