@@ -21,6 +21,7 @@ background_mode = 2
 sky = SubResource("Sky_pku1s")
 tonemap_mode = 3
 tonemap_exposure = 1.92
+ssr_enabled = true
 ssao_enabled = true
 ssil_intensity = 6.59
 sdfgi_enabled = true
