@@ -59,6 +59,7 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 
 func _ready():
+	
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	
 	
@@ -77,7 +78,9 @@ func _physics_process(delta):
 		
 		
 	#slide
-	
+	if sliding:
+		if !slide_sound.playing == false:
+			slide_sound.play()
 	
 	#slide_speed = slide_speed * 2
 	
@@ -87,6 +90,8 @@ func _physics_process(delta):
 		slide()
 		
 	if Input.is_action_just_released("slide"):
+		slide_sound.stop()
+		slide_speed = 0
 		state = RUN
 		can_slide = true
 		sliding = false
@@ -229,6 +234,9 @@ func _on_stamina_timer_timeout():
 		
 func slide():
 	slide_speed = 1
+	
+	slide_sound.play()
+	
 	var look_dir = -neck.transform.basis.z
 	if can_slide:
 		SPEED = 0
@@ -248,10 +256,8 @@ func slide():
 	
 	while sliding == true:
 		
-		if !slide_sound.playing == true:
-			slide_sound.play()
-		
 		if slide_speed <= 0:
+			slide_sound.stop()
 			sliding = false
 			can_slide = true
 			slide_speed = 0
