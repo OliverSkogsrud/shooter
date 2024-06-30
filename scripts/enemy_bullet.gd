@@ -27,6 +27,6 @@ func _on_timer_timeout():
 func _on_area_3d_body_entered(body):
 	if body.has_method("damage"):
 		particles.emitting = true
-		body.damage(damage)
+		get_parent().get_node(body.get_path()).damage(damage)
 		#get_tree().create_timer(1.0).timeout
 		queue_free()
