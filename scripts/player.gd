@@ -45,6 +45,7 @@ var gravity_vec = Vector3()
 @onready var hand = $Neck/Camera3D/hand
 @onready var health_bar = $Health_Stamina_bars/HealthBar
 @onready var stamina_bar = $Health_Stamina_bars/staminaBar
+@onready var slide_sound = $Slide_sound
 
 @onready var slidecheck = $SlideCheck
 
@@ -246,6 +247,10 @@ func slide():
 		print("slide_speed: " + str(slide_speed))
 	
 	while sliding == true:
+		
+		if !slide_sound.playing == true:
+			slide_sound.play()
+		
 		if slide_speed <= 0:
 			sliding = false
 			can_slide = true
