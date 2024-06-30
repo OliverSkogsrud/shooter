@@ -272,7 +272,10 @@ func slide():
 		
 		scale.y = 0.5
 		
-		slide_speed -= 0.3
+		if get_real_velocity().y > 0:
+			slide_speed -= 0.5
+		else: 
+			slide_speed -= 0.3
 		
 		if get_floor_angle() >= 0.2 and sliding and get_real_velocity().y < 0:
 			slide_speed += get_floor_angle() * 3

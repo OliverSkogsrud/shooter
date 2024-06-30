@@ -22,6 +22,7 @@ sky_material = SubResource("ProceduralSkyMaterial_ky8we")
 [sub_resource type="Environment" id="Environment_mhql0"]
 background_mode = 2
 sky = SubResource("Sky_pku1s")
+reflected_light_source = 2
 tonemap_mode = 3
 tonemap_exposure = 1.92
 ssr_enabled = true
@@ -54,7 +55,7 @@ volumetric_fog_albedo = Color(0.162066, 0.162066, 0.162066, 1)
 volumetric_fog_emission_energy = 0.0
 volumetric_fog_length = 14.45
 adjustment_enabled = true
-adjustment_brightness = 0.67
+adjustment_brightness = 0.5
 adjustment_saturation = 1.15
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_poe8q"]
@@ -437,6 +438,9 @@ transform = Transform3D(-2.89066e-15, -0.504297, 6.61306e-08, -2.20435e-08, 6.61
 
 [node name="Light31" parent="Lights" instance=ExtResource("6_ng285")]
 transform = Transform3D(-2.89066e-15, -0.504297, 6.61306e-08, -2.20435e-08, 6.61306e-08, 0.504297, -0.504297, 1.06789e-22, -2.20435e-08, 5.38422, 1.71352, 66.0379)
+
+[node name="Light35" parent="Lights" instance=ExtResource("6_ng285")]
+transform = Transform3D(-2.89066e-15, -0.504297, 6.61306e-08, -2.20435e-08, 6.61306e-08, 0.504297, -0.504297, 1.06789e-22, -2.20435e-08, 5.38422, -2.40314, 55.0723)
 
 [node name="Light32" parent="Lights" instance=ExtResource("6_ng285")]
 transform = Transform3D(-0.504297, 2.20435e-08, -2.20435e-08, -2.20435e-08, 6.61306e-08, 0.504297, 2.20435e-08, 0.504297, -6.61306e-08, 1.38008, 2.19753, 34.7394)
