@@ -1,7 +1,8 @@
-[gd_scene load_steps=17 format=3 uid="uid://crj60x4lao40r"]
+[gd_scene load_steps=18 format=3 uid="uid://crj60x4lao40r"]
 
 [ext_resource type="Script" path="res://scripts/world.gd" id="1_iaofp"]
 [ext_resource type="PackedScene" uid="uid://cfwig4lfftnqn" path="res://Scenes/player.tscn" id="1_kn8p0"]
+[ext_resource type="Texture2D" uid="uid://7t4gfebmogia" path="res://HDRs/kloofendal_48d_partly_cloudy_puresky_2k.exr" id="2_gmry0"]
 [ext_resource type="Texture2D" uid="uid://ct4alpv1mr0dl" path="res://textures/kenney_prototypeTextures/PNG/Dark/texture_03.png" id="2_wrr8e"]
 [ext_resource type="Texture2D" uid="uid://blnwmre3gxj5r" path="res://textures/kenney_prototypeTextures/PNG/Orange/texture_01.png" id="3_6435r"]
 [ext_resource type="PackedScene" uid="uid://nq66g28ff5c3" path="res://Scenes/dummy.tscn" id="3_vjmm5"]
@@ -11,6 +12,8 @@
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ky8we"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+sky_curve = 0.00937501
+sky_cover = ExtResource("2_gmry0")
 ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
 
 [sub_resource type="Sky" id="Sky_pku1s"]
