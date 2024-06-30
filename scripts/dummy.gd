@@ -62,6 +62,10 @@ func damage(dmg):
 		
 		await get_tree().create_timer(0.3).timeout
 		
+		visible = false
+		
+		await get_tree().create_timer(0.8).timeout
+		
 		queue_free()
 	
 	print(dmg)
