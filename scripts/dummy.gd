@@ -1,6 +1,6 @@
 extends CharacterBody3D
 
-var health = 40
+var health = 20
 
 @onready var ray = $RayCast3D
 @onready var barrel = $EnemyGun/Barrel
