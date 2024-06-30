@@ -263,7 +263,7 @@ func slide():
 		
 		slide_speed -= 0.3
 		
-		if get_floor_angle() >= 0.2 and sliding:
+		if get_floor_angle() >= 0.2 and sliding and get_real_velocity().y < 0:
 			slide_speed += get_floor_angle() * 3
 		
 		velocity = velocity.move_toward(look_dir * slide_speed, 0.1) #= look_dir * slide_speed
