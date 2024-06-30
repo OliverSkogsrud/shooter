@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://crj60x4lao40r"]
+[gd_scene load_steps=19 format=3 uid="uid://crj60x4lao40r"]
 
 [ext_resource type="Script" path="res://scripts/world.gd" id="1_iaofp"]
 [ext_resource type="PackedScene" uid="uid://cfwig4lfftnqn" path="res://Scenes/player.tscn" id="1_kn8p0"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://dkvla0u7boqgm" path="res://Scenes/light.tscn" id="6_ng285"]
 [ext_resource type="PackedScene" uid="uid://dffeqgxo26bav" path="res://Scenes/med_kit.tscn" id="7_4hbgn"]
 [ext_resource type="Texture2D" uid="uid://yxs4r52318f1" path="res://textures/kenney_prototypeTextures/PNG/Dark/texture_13.png" id="8_mr78y"]
+[ext_resource type="PackedScene" uid="uid://dnx8uc3we0md7" path="res://Scenes/portal.tscn" id="10_htbsn"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ky8we"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -540,3 +541,6 @@ mesh = SubResource("BoxMesh_tyfrx")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Turorial/SlideUnder"]
 transform = Transform3D(6.79557, 0, 0, 0, 2.81884, 0, 0, 0, 0.521845, -0.302007, 1.67518, 0)
 shape = SubResource("BoxShape3D_0v1ar")
+
+[node name="Portal" parent="." instance=ExtResource("10_htbsn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.52078, 2.99155, 92.4398)

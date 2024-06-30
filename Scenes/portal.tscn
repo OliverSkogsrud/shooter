@@ -1,0 +1,61 @@
+[gd_scene load_steps=9 format=3 uid="uid://dnx8uc3we0md7"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6f3ns"]
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+emission_energy_multiplier = 16.0
+disable_receive_shadows = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_s7onb"]
+material = SubResource("StandardMaterial3D_6f3ns")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_31a4u"]
+
+[sub_resource type="Curve" id="Curve_qdo7n"]
+min_value = -2.0
+max_value = 2.0
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_w6hk3"]
+curve = SubResource("Curve_qdo7n")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_gs2wj"]
+emission_shape = 3
+emission_box_extents = Vector3(1, 1, 1)
+direction = Vector3(0, 0, 0)
+initial_velocity_min = 3.0
+initial_velocity_max = 4.0
+orbit_velocity_min = 0.1
+orbit_velocity_max = 0.5
+orbit_velocity_curve = SubResource("CurveTexture_w6hk3")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a285b"]
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+emission_energy_multiplier = 16.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_mi0qn"]
+material = SubResource("StandardMaterial3D_a285b")
+size = Vector3(0.04, 0.04, 0.04)
+
+[node name="Portal" type="Node3D"]
+
+[node name="PortalArea" type="Area3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="PortalArea"]
+transform = Transform3D(3.99251, 0, 0, 0, 5.81842, 0, 0, 0, 0.397947, 0, 0, 0)
+mesh = SubResource("BoxMesh_s7onb")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PortalArea"]
+transform = Transform3D(3.99251, 0, 0, 0, 5.81842, 0, 0, 0, 2.431, 0, 0, 0)
+shape = SubResource("BoxShape3D_31a4u")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.140695, 0.649779, -1.38831)
+amount = 16
+process_material = SubResource("ParticleProcessMaterial_gs2wj")
+draw_pass_1 = SubResource("BoxMesh_mi0qn")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
