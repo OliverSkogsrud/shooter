@@ -19,7 +19,7 @@ func _process(delta):
 	if $RayCast3D.is_colliding():
 		var collider = $RayCast3D.get_collider()
 		if collider.has_method("damage"):
-			collider.damage(damage)
+			get_parent().get_node(collider.get_path()).damage(20)
 		else:
 			particles.emitting = true
 			await get_tree().create_timer(1.0).timeout
