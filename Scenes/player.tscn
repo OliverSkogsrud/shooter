@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://cfwig4lfftnqn"]
+[gd_scene load_steps=10 format=3 uid="uid://cfwig4lfftnqn"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_oa110"]
 [ext_resource type="PackedScene" uid="uid://bk42qcq0xkh8q" path="res://Scenes/gun.tscn" id="2_oyjh0"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://c62qu1sk16bkk" path="res://Scenes/health_stamina_bars.tscn" id="4_cyn8l"]
 [ext_resource type="AudioStream" uid="uid://clvlykoawbt23" path="res://Sounds/GunShot.wav" id="5_o6omw"]
 [ext_resource type="AudioStream" uid="uid://bqtj881ptio6q" path="res://Sounds/slidesound.wav" id="6_kbm6o"]
+[ext_resource type="PackedScene" uid="uid://fh1h3gyumgrq" path="res://Scenes/speed_lines.tscn" id="7_u2a1s"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_c3iue"]
 
@@ -52,5 +53,7 @@ target_position = Vector3(0, 0, 1)
 
 [node name="Slide_sound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_kbm6o")
+
+[node name="SpeedLines" parent="." instance=ExtResource("7_u2a1s")]
 
 [connection signal="timeout" from="StaminaTimer" to="." method="_on_stamina_timer_timeout"]
